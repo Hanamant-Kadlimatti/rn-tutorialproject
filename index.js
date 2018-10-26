@@ -15,7 +15,14 @@ import {name as appName} from './app.json';
 // import TextInputEmailPassword from './components/TextInputEmailPassword'
 // import ButtonDisplayHandle from './components/ButtonDisplayHandle'
 // import TouchableHilight from './components/TouchableHilight'
-import BasicScrollView from './components/BasicScrollView'
+// import BasicScrollView from './components/BasicScrollView'
+// import Touch from './components/Touch'
+// import HorizontalScrollView from './components/HorizontalScrollView'
+// import ViewPAgeAndroidExample from './components/ViewPAgeAndroidExample'
+// import FlatListDataExample from './components/FlatListDataExample'
+// import FlatListWIthImage from './components/FlatListWIthImage'
+// import FlatListSwipeOutDelete from './components/FlatListSwipeOutDelete'
+// import VerticalScrollView from './components/VerticalScrollView'
+import BasicSectionList from './components/BasicSectionList'
 
-
-AppRegistry.registerComponent(appName, () => BasicScrollView);
+AppRegistry.registerComponent(appName, () => BasicSectionList);
