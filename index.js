@@ -23,6 +23,9 @@ import {name as appName} from './app.json';
 // import FlatListWIthImage from './components/FlatListWIthImage'
 // import FlatListSwipeOutDelete from './components/FlatListSwipeOutDelete'
 // import VerticalScrollView from './components/VerticalScrollView'
-import BasicSectionList from './components/BasicSectionList'
+// import BasicSectionList from './components/BasicSectionList'
+// import FlatListLayoutViewAboveBotton from './components/FlatListLayoutViewAboveBotton'
+// import FlatListSwipeOutEdit from './components/FlatListSwipeOutEdit'
+import HorizontalFlatListWheatherApp from './components/HorizontalFlatListWheatherApp'
 
-AppRegistry.registerComponent(appName, () => BasicSectionList);
+AppRegistry.registerComponent(appName, () => HorizontalFlatListWheatherApp);

@@ -1,16 +1,28 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, FlatList, Image, Alert, Platform} from 'react-native';
-import Swipeout from 'react-native-swipeout';
+import {View, Text, StyleSheet, FlatList, Image, Alert} from 'react-native';
+import Swipeout from 'react-native-swipeout'
 import FlatListDataWithImage from '../data/FlatListDataWithImage'
 
-class FlatListLayoutView extends Component {
+import AddModal from './AddModal'
+import EditModal from './EditModal'
 
+
+class FlatListItem extends Component {
     constructor (props){
         super(props)
         this.state = {
           activeRowKey : null, 
+          numberOfRefresh : 0
         }
     }
+    refreshFlatListItem = () =>{
+        this.setState((prevState)  => {
+              return {
+                numberOfRefresh: prevState.numberOfRefresh + 1
+              }
+            })
+    }
+
     render (){
         const swipeSettings = {
             autoClose : true,
@@ -25,7 +37,14 @@ class FlatListLayoutView extends Component {
             },
 
             //swiping out from right side you can use swiping out left sidel also using => 'lfet'
-            right : [   
+            right : [ 
+                {
+                    onPress:() => {
+                    //   alert("Update")
+                    this.props.parentFlatList.refs.editModal.showEditModal(FlatListDataWithImage[this.props.index], this)
+                    },
+                    text: 'edit', type:'primary'
+                }, 
                 {
                     onPress: () => {
                         const deletingROw= this.state.activeRowKey;
@@ -51,7 +70,6 @@ class FlatListLayoutView extends Component {
         return (
           <Swipeout {...swipeSettings}>
                <View style={{flex:1, flexDirection:'column'}}>
-               
                 <View style={{flex:1, flexDirection: 'row', backgroundColor:'mediumseagreen'}}>
                 <Image style={styles.img} source={{uri : this.props.item.imageUrl}}></Image>
                <View style={{flex:1, flexDirection:'column'}}>
@@ -69,7 +87,7 @@ class FlatListLayoutView extends Component {
     }
 }
 
-class FlatListSwipeOutDelete extends Component{
+class FlatListSwipeOutEdit extends Component{
     constructor (props){
         super(props)
         this.state = {
@@ -85,11 +103,8 @@ class FlatListSwipeOutDelete extends Component{
     }
     render(){
         return (
-            <View style={{flex: 30, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
-               <View style={{backgroundColor : 'tomato', height: '70'}}>
-
-               </View>
-                <FlatList 
+            <View style={styles.container}>
+                <FlatList
                  data={FlatListDataWithImage}
                  renderItem={({item, index}) => {
                     return (
@@ -101,16 +116,23 @@ class FlatListSwipeOutDelete extends Component{
                 >
 
                 </FlatList>
+                <AddModal ref={'addModal'} parentFlatList={this} >
+
+                </AddModal>
+
+                 <EditModal ref={'editModal'} parentFlatList={this} >
+
+                </EditModal>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create ({
-    // container : {
-    //     flex : 1,
-    //     marginTop : 34
-    // },
+    container : {
+        flex : 1,
+        // marginTop : 10
+    },
     flatlistitem : {
         // color: 'white',
         padding : 10,
@@ -123,4 +145,4 @@ const styles = StyleSheet.create ({
     }
 })
 
-export default FlatListLayoutView;
+export default FlatListSwipeOutEdit;
